@@ -1,9 +1,9 @@
-package com.jkarkoszka.opencv.example;
+package com.jkarkoszka.gesturedetector;
 
-import com.jkarkoszka.opencv.example.converter.MatToBufferedImageConverter;
-import com.jkarkoszka.opencv.example.model.DetectedPoint;
-import com.jkarkoszka.opencv.example.service.*;
-import com.jkarkoszka.opencv.example.window.Window;
+import com.jkarkoszka.gesturedetector.converter.MatToBufferedImageConverter;
+import com.jkarkoszka.gesturedetector.model.DetectedPoint;
+import com.jkarkoszka.gesturedetector.service.*;
+import com.jkarkoszka.gesturedetector.window.Window;
 import org.opencv.core.Mat;
 
 import java.awt.image.BufferedImage;

@@ -1,4 +1,4 @@
-package com.jkarkoszka.opencv.example.converter;
+package com.jkarkoszka.gesturedetector.converter;
 
 import org.opencv.core.Mat;
 

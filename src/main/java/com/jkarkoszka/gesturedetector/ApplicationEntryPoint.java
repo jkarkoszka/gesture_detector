@@ -1,12 +1,12 @@
-package com.jkarkoszka.opencv.example;
+package com.jkarkoszka.gesturedetector;
 
 import javax.swing.*;
 
-import com.jkarkoszka.opencv.example.converter.MatToBufferedImageConverter;
+import com.jkarkoszka.gesturedetector.service.*;
+import com.jkarkoszka.gesturedetector.window.Window;
+import com.jkarkoszka.gesturedetector.converter.MatToBufferedImageConverter;
 import com.jkarkoszka.opencv.example.model.Move;
-import com.jkarkoszka.opencv.example.service.*;
-import com.jkarkoszka.opencv.example.window.Window;
-import com.jkarkoszka.opencv.example.window.Panel;
+import com.jkarkoszka.gesturedetector.window.Panel;
 import org.opencv.core.Core;
 import org.opencv.highgui.VideoCapture;
 

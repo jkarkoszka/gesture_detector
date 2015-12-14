@@ -1,6 +1,7 @@
-package com.jkarkoszka.opencv.example.service;
+package com.jkarkoszka.gesturedetector.service;
 
-import com.jkarkoszka.opencv.example.model.DetectedPoint;
+import com.jkarkoszka.gesturedetector.model.DetectedPoint;
+import com.jkarkoszka.gesturedetector.model.Move;
 import com.jkarkoszka.opencv.example.model.Move;
 
 import java.util.ArrayList;

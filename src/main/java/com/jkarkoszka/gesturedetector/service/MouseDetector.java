@@ -1,10 +1,9 @@
-package com.jkarkoszka.opencv.example.service;
+package com.jkarkoszka.gesturedetector.service;
 
 
-import com.jkarkoszka.opencv.example.model.DetectedPoint;
+import com.jkarkoszka.gesturedetector.model.DetectedPoint;
 import org.opencv.core.Mat;
 import org.opencv.core.Point;
-import org.opencv.core.Size;
 
 import java.awt.*;
 

@@ -1,4 +1,4 @@
-package com.jkarkoszka.opencv.example.window;
+package com.jkarkoszka.gesturedetector.window;
 
 import javax.swing.*;
 import java.awt.*;

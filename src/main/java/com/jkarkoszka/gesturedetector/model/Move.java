@@ -1,6 +1,6 @@
-package com.jkarkoszka.opencv.example.model;
+package com.jkarkoszka.gesturedetector.model;
 
-import com.jkarkoszka.opencv.example.service.GeometryService;
+import com.jkarkoszka.gesturedetector.service.GeometryService;
 import org.opencv.core.Point;
 
 abstract class Move {

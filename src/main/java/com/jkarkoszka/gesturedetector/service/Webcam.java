@@ -1,4 +1,4 @@
-package com.jkarkoszka.opencv.example.service;
+package com.jkarkoszka.gesturedetector.service;
 
 import org.opencv.core.Core;
 import org.opencv.core.Mat;

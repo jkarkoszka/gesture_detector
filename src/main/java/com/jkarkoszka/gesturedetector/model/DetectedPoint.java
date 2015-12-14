@@ -1,4 +1,4 @@
-package com.jkarkoszka.opencv.example.model;
+package com.jkarkoszka.gesturedetector.model;
 
 import org.opencv.core.Point;
 import org.opencv.core.Size;

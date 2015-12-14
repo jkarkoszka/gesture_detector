@@ -1,4 +1,4 @@
-package com.jkarkoszka.opencv.example.window;
+package com.jkarkoszka.gesturedetector.window;
 
 import javax.swing.*;
 import java.awt.*;
@@ -6,9 +6,9 @@ import java.awt.image.BufferedImage;
 
 public class Window extends JFrame {
 
-    private Panel panel;
+    private com.jkarkoszka.gesturedetector.window.Panel panel;
 
-    public Window(Panel panel) throws HeadlessException {
+    public Window(com.jkarkoszka.gesturedetector.window.Panel panel) throws HeadlessException {
         super();
         this.panel = panel;
         this.setTitle("Gesture detector");
