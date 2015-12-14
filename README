@@ -1,0 +1,5 @@
+Requirements:
+- Java 8
+- OpenCV 2.4.10
+
+Need to import OpenCV as a library to InteliJ (or other IDE)
