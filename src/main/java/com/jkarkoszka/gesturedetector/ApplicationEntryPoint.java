@@ -2,10 +2,10 @@ package com.jkarkoszka.gesturedetector;
 
 import javax.swing.*;
 
+import com.jkarkoszka.gesturedetector.model.Move;
 import com.jkarkoszka.gesturedetector.service.*;
 import com.jkarkoszka.gesturedetector.window.Window;
 import com.jkarkoszka.gesturedetector.converter.MatToBufferedImageConverter;
-import com.jkarkoszka.opencv.example.model.Move;
 import com.jkarkoszka.gesturedetector.window.Panel;
 import org.opencv.core.Core;
 import org.opencv.highgui.VideoCapture;
@@ -27,7 +27,8 @@ public class ApplicationEntryPoint extends JPanel{
 
         KeyPointsDetector keyPointsDetector = new KeyPointsDetector(geometryService);
 
-        MoveDetector moveDetector = new MoveDetector(new ArrayList<Move>());
+        ArrayList<Move> availableMoves = new ArrayList<>();
+        MoveDetector moveDetector = new MoveDetector(availableMoves);
 
         MatToBufferedImageConverter matToBufferedImageConverter = new MatToBufferedImageConverter();
 

@@ -2,7 +2,6 @@ package com.jkarkoszka.gesturedetector.service;
 
 import com.jkarkoszka.gesturedetector.model.DetectedPoint;
 import com.jkarkoszka.gesturedetector.model.Move;
-import com.jkarkoszka.opencv.example.model.Move;
 
 import java.util.ArrayList;
 
@@ -19,6 +18,4 @@ public class MoveDetector {
 
         //return lista movów
     }
-
-
 }

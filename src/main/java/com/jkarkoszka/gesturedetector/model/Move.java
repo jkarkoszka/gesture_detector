@@ -3,7 +3,7 @@ package com.jkarkoszka.gesturedetector.model;
 import com.jkarkoszka.gesturedetector.service.GeometryService;
 import org.opencv.core.Point;
 
-abstract class Move {
+public abstract class Move {
 
     protected GeometryService geometryService;
 
