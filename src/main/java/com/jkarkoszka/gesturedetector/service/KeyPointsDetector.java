@@ -17,7 +17,7 @@ public class KeyPointsDetector {
 
     public ArrayList<DetectedPoint> detect(ArrayList<DetectedPoint> detectedPoints) {
         if (detectedPoints.size() < 3) {
-            return detectedPoints;
+            return new ArrayList<>();
         }
         ArrayList<DetectedPoint> keyPoints = new ArrayList<>();
         keyPoints.add(detectedPoints.get(0));
@@ -29,23 +29,19 @@ public class KeyPointsDetector {
                 keyPoints.add(detectedPoints.get(i));
             }
         }
-        keyPoints.add(detectedPoints.get(detectedPoints.size()-1));
-        if (keyPoints.size() == 2) {
-            keyPoints.clear();
+        if (keyPoints.size() < 2) {
+            keyPoints = new ArrayList<>();
         }
-        //System.out.println("waznych punktow = " + keyPoints.size());
         return keyPoints;
     }
 
     private boolean ifAngleIsEnough(DetectedPoint lastKeyPoint, DetectedPoint currentPoint, DetectedPoint nextPoint) {
         Integer angle = geometryService.getAngle(lastKeyPoint.getPoint(), currentPoint.getPoint(), nextPoint.getPoint());
-        //System.out.println("kąt = " + angle);
         return angle < 120;
     }
 
     private boolean ifDistanceIsEnough(DetectedPoint lastKeyPoint, DetectedPoint currentPoint) {
         double distance = geometryService.getDistance(lastKeyPoint.getPoint(), currentPoint.getPoint());
-        // System.out.println("dystans = " + distance);
         return distance > 100;
     }
 

@@ -1,5 +1,7 @@
 package com.jkarkoszka.gesturedetector.service;
 
+import org.apache.commons.math3.linear.*;
+import org.opencv.core.Mat;
 import org.opencv.core.Point;
 
 public class GeometryService {
@@ -28,5 +30,15 @@ public class GeometryService {
                         +
                         Math.pow(point1.y-point2.y, 2)
         );
+    }
+
+    public Integer getAngle(Point point1, Point point2) {
+        if (point1.x == point2.x) {
+            return 0;
+        }
+        if (point1.y == point2.y) {
+            return 90;
+        }
+        return new Double(360*Math.atan((point1.x - point2.x)/(point1.y - point2.y))/6.28).intValue();
     }
 }

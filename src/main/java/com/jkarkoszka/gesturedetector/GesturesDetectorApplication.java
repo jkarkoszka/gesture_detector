@@ -2,6 +2,7 @@ package com.jkarkoszka.gesturedetector;
 
 import com.jkarkoszka.gesturedetector.converter.MatToBufferedImageConverter;
 import com.jkarkoszka.gesturedetector.model.DetectedPoint;
+import com.jkarkoszka.gesturedetector.model.move.Move;
 import com.jkarkoszka.gesturedetector.service.*;
 import com.jkarkoszka.gesturedetector.window.Window;
 import org.opencv.core.Mat;
@@ -17,6 +18,8 @@ public class GesturesDetectorApplication {
 
     private DetectedPoints detectedPoints;
 
+    private GestureDetector gestureDetector;
+
     private Detector ballDetector;
 
     private KeyPointsDetector keyPointsDetector;
@@ -25,7 +28,7 @@ public class GesturesDetectorApplication {
 
     private MatToBufferedImageConverter matToBufferedImageConverter;
 
-    public GesturesDetectorApplication(Window window, Webcam webcam, DetectedPoints detectedPoints, Detector detector, KeyPointsDetector keyPointsDetector, MoveDetector moveDetector, MatToBufferedImageConverter matToBufferedImageConverter) {
+    public GesturesDetectorApplication(Window window, Webcam webcam, DetectedPoints detectedPoints, GestureDetector gestureDetector, Detector detector, KeyPointsDetector keyPointsDetector, MoveDetector moveDetector, MatToBufferedImageConverter matToBufferedImageConverter) {
         this.window = window;
         this.webcam = webcam;
         this.moveDetector = moveDetector;
@@ -33,6 +36,7 @@ public class GesturesDetectorApplication {
         this.keyPointsDetector = keyPointsDetector;
         this.ballDetector = detector;
         this.detectedPoints = detectedPoints;
+        this.gestureDetector = gestureDetector;
     }
 
     public void run() {
@@ -52,9 +56,10 @@ public class GesturesDetectorApplication {
             ArrayList<DetectedPoint> keyPoints = keyPointsDetector.detect(detectedPoints.get());
             currentFrame = keyPointsDetector.draw(currentFrame, keyPoints);
 
-            moveDetector.detect(keyPoints);
+            ArrayList<Move> detectedMoves = moveDetector.detect(keyPoints);
 
-
+            Boolean isGestureDetected = gestureDetector.isMatch(detectedMoves);
+            gestureDetector.draw(currentFrame, isGestureDetected);
 
             renderWindow(currentFrame);
         }

@@ -2,7 +2,7 @@ package com.jkarkoszka.gesturedetector;
 
 import javax.swing.*;
 
-import com.jkarkoszka.gesturedetector.model.Move;
+import com.jkarkoszka.gesturedetector.model.move.*;
 import com.jkarkoszka.gesturedetector.service.*;
 import com.jkarkoszka.gesturedetector.window.Window;
 import com.jkarkoszka.gesturedetector.converter.MatToBufferedImageConverter;
@@ -28,13 +28,25 @@ public class ApplicationEntryPoint extends JPanel{
         KeyPointsDetector keyPointsDetector = new KeyPointsDetector(geometryService);
 
         ArrayList<Move> availableMoves = new ArrayList<>();
+        availableMoves.add(new MoveUp(geometryService));
+        availableMoves.add(new MoveDown(geometryService));
+        availableMoves.add(new MoveDownRight(geometryService));
+        availableMoves.add(new MoveUpRight(geometryService));
         MoveDetector moveDetector = new MoveDetector(availableMoves);
+
+        ArrayList<Move> gestureMoves = new ArrayList<>();
+        gestureMoves.add(new MoveUp(geometryService));
+        gestureMoves.add(new MoveDownRight(geometryService));
+        gestureMoves.add(new MoveUpRight(geometryService));
+        gestureMoves.add(new MoveDown(geometryService));
+
+        GestureDetector gestureDetector = new GestureDetector(gestureMoves);
 
         MatToBufferedImageConverter matToBufferedImageConverter = new MatToBufferedImageConverter();
 
         DetectedPoints detectedPoints = new DetectedPoints();
 
-        GesturesDetectorApplication application = new GesturesDetectorApplication(window, webcam, detectedPoints, ballDetector, keyPointsDetector, moveDetector, matToBufferedImageConverter);
+        GesturesDetectorApplication application = new GesturesDetectorApplication(window, webcam, detectedPoints, gestureDetector, ballDetector, keyPointsDetector, moveDetector, matToBufferedImageConverter);
         application.run();
     }
 }
