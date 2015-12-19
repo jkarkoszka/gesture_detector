@@ -9,7 +9,7 @@ import java.util.ArrayList;
 
 public class DetectedPoints {
 
-    final private static Integer GESTURE_LENGTH = 15;
+    final private static Integer GESTURE_LENGTH = 10;
 
     private ArrayList<DetectedPoint> detectedPoints = new ArrayList<>();
 

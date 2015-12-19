@@ -35,7 +35,7 @@ public class BallDetector implements Detector {
         Mat hsvFrame = new Mat();
         Mat thresholdedFrame1 =  new Mat();
         Imgproc.cvtColor(currentFrame, hsvFrame, Imgproc.COLOR_BGR2HSV);
-        Core.inRange(hsvFrame, new Scalar(6, 75, 100), new Scalar(17, 255, 255), thresholdedFrame1);
+        Core.inRange(hsvFrame, new Scalar(10, 100, 125), new Scalar(40, 255, 255), thresholdedFrame1);
         Imgproc.GaussianBlur(thresholdedFrame1, thresholdedFrame1, new Size(9,9),0,0);
         detectionFrame = thresholdedFrame1.clone();
         Mat detectedCircles = new Mat();

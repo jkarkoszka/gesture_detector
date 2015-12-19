@@ -21,7 +21,7 @@ public class ApplicationEntryPoint extends JPanel{
 
         Webcam webcam = new Webcam(new VideoCapture(0));
 
-        Detector ballDetector = new MouseDetector();
+        Detector ballDetector = new BallDetector();
 
         GeometryService geometryService = new GeometryService();
 
