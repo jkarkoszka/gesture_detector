@@ -67,7 +67,7 @@ public class GesturesDetectorApplication {
 
     private void renderWindow(Mat mat) {
         BufferedImage currentFrame =  matToBufferedImageConverter.convert(mat);
-        window.setSize(currentFrame.getWidth() + 40, currentFrame.getHeight() + 60);
+        window.setSize(currentFrame.getWidth(), currentFrame.getHeight());
         window.setImage(currentFrame);
         window.repaint();
     }

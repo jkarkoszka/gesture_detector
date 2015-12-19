@@ -7,13 +7,19 @@ import org.opencv.imgproc.Imgproc;
 
 public class BallDetector implements Detector {
 
+    protected Mat detectionFrame;
+
+    public Mat getDetectionFrame() {
+        return detectionFrame;
+    }
+
     public DetectedPoint detect(Mat currentFrame) {
         Mat detectedCircles = detectedCirclesFromCurrentFrame(currentFrame);
         DetectedPoint detectedPoint = null;
         int rows = detectedCircles.rows();
         int elemSize = (int)detectedCircles.elemSize();
         float[] data2 = new float[rows * elemSize/4];
-        if (data2.length>0){
+        if (data2.length>0) {
             detectedCircles.get(0, 0, data2);
             for(int i=0; i<data2.length; i=i+3) {
                 Long currentTimestamp = System.currentTimeMillis() / 1000L;
@@ -26,12 +32,14 @@ public class BallDetector implements Detector {
     }
 
     private Mat detectedCirclesFromCurrentFrame(Mat currentFrame) {
-        Mat temporaryFrame = new Mat();
-        Imgproc.cvtColor(currentFrame, temporaryFrame, Imgproc.COLOR_BGR2HSV_FULL);
-        Core.inRange(temporaryFrame, new Scalar(162, 0, 0), new Scalar(168, 255, 255), temporaryFrame);
-        Imgproc.GaussianBlur(temporaryFrame, temporaryFrame, new Size(9,9),0,0);
+        Mat hsvFrame = new Mat();
+        Mat thresholdedFrame1 =  new Mat();
+        Imgproc.cvtColor(currentFrame, hsvFrame, Imgproc.COLOR_BGR2HSV);
+        Core.inRange(hsvFrame, new Scalar(6, 75, 100), new Scalar(17, 255, 255), thresholdedFrame1);
+        Imgproc.GaussianBlur(thresholdedFrame1, thresholdedFrame1, new Size(9,9),0,0);
+        detectionFrame = thresholdedFrame1.clone();
         Mat detectedCircles = new Mat();
-        Imgproc.HoughCircles(temporaryFrame, detectedCircles, Imgproc.CV_HOUGH_GRADIENT, 2, currentFrame.height()/4, 500, 50, 0, 0);
+        Imgproc.HoughCircles(thresholdedFrame1, detectedCircles, Imgproc.CV_HOUGH_GRADIENT, 2, currentFrame.height()/4, 500, 50, 0, 0);
         return detectedCircles;
     }
 

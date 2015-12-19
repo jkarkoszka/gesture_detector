@@ -27,6 +27,7 @@ public class MoveDetector {
                 }
             }
         }
+        System.out.println("detectedMoves = "+detectedMoves.size());
         return detectedMoves;
     }
 }

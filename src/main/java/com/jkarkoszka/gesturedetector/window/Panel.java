@@ -22,7 +22,7 @@ public class Panel extends JPanel {
 
     public void paintComponent(Graphics g){
         if (image instanceof BufferedImage) {
-            g.drawImage(getImage(), 10, 10, getImage().getWidth(), getImage().getHeight(), this);
+            g.drawImage(getImage(), 0, 0, getImage().getWidth(), getImage().getHeight(), this);
         }
     }
 }

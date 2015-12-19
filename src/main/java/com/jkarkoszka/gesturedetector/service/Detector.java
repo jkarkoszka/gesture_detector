@@ -8,4 +8,6 @@ public interface Detector {
     DetectedPoint detect(Mat currentFrame);
 
     Mat draw(Mat currentFrame, DetectedPoint detectedPoint);
+
+    Mat getDetectionFrame();
 }

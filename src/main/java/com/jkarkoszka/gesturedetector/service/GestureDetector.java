@@ -7,6 +7,7 @@ import org.opencv.core.Point;
 import org.opencv.core.Scalar;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class GestureDetector {
 
@@ -20,8 +21,11 @@ public class GestureDetector {
         if (detectedMoves.size() < gestureMoves.size()) {
             return false;
         }
-        detectedMoves.subList(detectedMoves.size()-gestureMoves.size(), detectedMoves.size()-1);
-        if (!detectedMoves.equals(gestureMoves)) {
+        Integer from = detectedMoves.size()-gestureMoves.size();
+        Integer to = detectedMoves.size();
+        List<Move> detectedGestureMoves = detectedMoves.subList(from, to);
+        System.out.println("detectedGestureMoves = "+detectedGestureMoves.size());
+        if (!detectedGestureMoves.equals(gestureMoves)) {
             return false;
         }
         return true;
