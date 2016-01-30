@@ -1,6 +1,7 @@
 package com.jkarkoszka.gesturedetector.service;
 
 import com.jkarkoszka.gesturedetector.model.DetectedPoint;
+import com.jkarkoszka.gesturedetector.window.ConfigurationPanel;
 import org.opencv.core.*;
 import org.opencv.core.Point;
 import org.opencv.imgproc.Imgproc;
@@ -8,6 +9,12 @@ import org.opencv.imgproc.Imgproc;
 public class BallDetector implements Detector {
 
     protected Mat detectionFrame;
+
+    protected ConfigurationPanel configurationPanel;
+
+    public BallDetector(ConfigurationPanel configurationPanel) {
+        this.configurationPanel = configurationPanel;
+    }
 
     public Mat getDetectionFrame() {
         return detectionFrame;
@@ -35,7 +42,15 @@ public class BallDetector implements Detector {
         Mat hsvFrame = new Mat();
         Mat thresholdedFrame1 =  new Mat();
         Imgproc.cvtColor(currentFrame, hsvFrame, Imgproc.COLOR_BGR2HSV);
-        Core.inRange(hsvFrame, new Scalar(10, 100, 125), new Scalar(40, 255, 255), thresholdedFrame1);
+        System.out.println(
+                "H <"+ configurationPanel.getCurrentLowH() +"," + configurationPanel.getCurrentHighH()+"> " +
+                "S <"+ configurationPanel.getCurrentLowS() +"," + configurationPanel.getCurrentHighV()+"> " +
+                "V <"+ configurationPanel.getCurrentLowV() +"," + configurationPanel.getCurrentHighV()+"> "
+
+        );
+        Core.inRange(hsvFrame, new Scalar(
+                configurationPanel.getCurrentLowH(), configurationPanel.getCurrentLowS(), configurationPanel.getCurrentLowV()),
+                new Scalar(configurationPanel.getCurrentHighH(), configurationPanel.getCurrentHighS(), configurationPanel.getCurrentHighV()), thresholdedFrame1);
         Imgproc.GaussianBlur(thresholdedFrame1, thresholdedFrame1, new Size(9,9),0,0);
         detectionFrame = thresholdedFrame1.clone();
         Mat detectedCircles = new Mat();

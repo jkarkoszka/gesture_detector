@@ -4,6 +4,7 @@ import com.jkarkoszka.gesturedetector.converter.MatToBufferedImageConverter;
 import com.jkarkoszka.gesturedetector.model.DetectedPoint;
 import com.jkarkoszka.gesturedetector.model.move.Move;
 import com.jkarkoszka.gesturedetector.service.*;
+import com.jkarkoszka.gesturedetector.window.ConfigurationWindow;
 import com.jkarkoszka.gesturedetector.window.Window;
 import org.opencv.core.Mat;
 
@@ -13,6 +14,8 @@ import java.util.ArrayList;
 public class GesturesDetectorApplication {
 
     private Window window;
+
+    private ConfigurationWindow configurationWindow;
 
     private Webcam webcam;
 
@@ -28,8 +31,9 @@ public class GesturesDetectorApplication {
 
     private MatToBufferedImageConverter matToBufferedImageConverter;
 
-    public GesturesDetectorApplication(Window window, Webcam webcam, DetectedPoints detectedPoints, GestureDetector gestureDetector, Detector detector, KeyPointsDetector keyPointsDetector, MoveDetector moveDetector, MatToBufferedImageConverter matToBufferedImageConverter) {
+    public GesturesDetectorApplication(Window window, ConfigurationWindow configurationWindow, Webcam webcam, DetectedPoints detectedPoints, GestureDetector gestureDetector, Detector detector, KeyPointsDetector keyPointsDetector, MoveDetector moveDetector, MatToBufferedImageConverter matToBufferedImageConverter) {
         this.window = window;
+        this.configurationWindow = configurationWindow;
         this.webcam = webcam;
         this.moveDetector = moveDetector;
         this.matToBufferedImageConverter = matToBufferedImageConverter;
@@ -40,6 +44,8 @@ public class GesturesDetectorApplication {
     }
 
     public void run() {
+        this.configurationWindow.repaint();
+
         while(true) {
             Mat currentFrame = webcam.getCurrentFrame();
 
@@ -61,7 +67,11 @@ public class GesturesDetectorApplication {
             Boolean isGestureDetected = gestureDetector.isMatch(detectedMoves);
             gestureDetector.draw(currentFrame, isGestureDetected);
 
-            renderWindow(currentFrame);
+            if (configurationWindow.isDebugMode()) {
+                renderWindow(ballDetector.getDetectionFrame());
+            } else {
+                renderWindow(currentFrame);
+            }
         }
     }
 

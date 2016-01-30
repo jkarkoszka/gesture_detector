@@ -4,6 +4,8 @@ import javax.swing.*;
 
 import com.jkarkoszka.gesturedetector.model.move.*;
 import com.jkarkoszka.gesturedetector.service.*;
+import com.jkarkoszka.gesturedetector.window.ConfigurationPanel;
+import com.jkarkoszka.gesturedetector.window.ConfigurationWindow;
 import com.jkarkoszka.gesturedetector.window.Window;
 import com.jkarkoszka.gesturedetector.converter.MatToBufferedImageConverter;
 import com.jkarkoszka.gesturedetector.window.Panel;
@@ -18,10 +20,12 @@ public class ApplicationEntryPoint extends JPanel{
         System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
 
         Window window = new Window(new Panel());
+        ConfigurationPanel configurationPanel = new ConfigurationPanel();
+        ConfigurationWindow configurationWindow = new ConfigurationWindow(configurationPanel);
 
-        Webcam webcam = new Webcam(new VideoCapture(0));
+        Webcam webcam = new Webcam(new VideoCapture(1));
 
-        Detector ballDetector = new BallDetector();
+        Detector ballDetector = new BallDetector(configurationPanel);
 
         GeometryService geometryService = new GeometryService();
 
@@ -46,7 +50,7 @@ public class ApplicationEntryPoint extends JPanel{
 
         DetectedPoints detectedPoints = new DetectedPoints();
 
-        GesturesDetectorApplication application = new GesturesDetectorApplication(window, webcam, detectedPoints, gestureDetector, ballDetector, keyPointsDetector, moveDetector, matToBufferedImageConverter);
+        GesturesDetectorApplication application = new GesturesDetectorApplication(window, configurationWindow, webcam, detectedPoints, gestureDetector, ballDetector, keyPointsDetector, moveDetector, matToBufferedImageConverter);
         application.run();
     }
 }
